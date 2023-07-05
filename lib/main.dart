@@ -26,26 +26,7 @@ class MyApp extends StatelessWidget {
                 color: Colors.black87,
               ))),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Amazon Clone'),
-        ),
-        body: Column(
-          children: [
-            Center(
-              child: Text('Hello World'),
-            ),
-            Builder(builder: (context) {
-              return ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, AuthScreen.routeName);
-                },
-                child: Text('Click'),
-              );
-            }),
-          ],
-        ),
-      ),
+      home: AuthScreen(),
     );
   }
 }
