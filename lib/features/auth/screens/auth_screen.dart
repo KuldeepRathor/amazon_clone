@@ -2,10 +2,10 @@
 
 import 'package:amazon_clone/common/widgets/custom_textfield.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
-import 'package:amazon_clone/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../../common/widgets/custom_button.dart';
+import '../services/auth_services.dart';
 
 enum Auth {
   signup,
@@ -29,13 +29,20 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
 
-  @override
   void signupUser() {
     authService.signUpUser(
       context: context,
       email: _emailController.text,
       password: _passwordController.text,
       name: _nameController.text,
+    );
+  }
+
+  void signInUser() {
+    authService.signInUser(
+      context: context,
+      email: _emailController.text,
+      password: _passwordController.text,
     );
   }
 
@@ -109,6 +116,9 @@ class _AuthScreenState extends State<AuthScreen> {
                           ),
                           CustomButton(
                             onTap: () {
+                              print('tap');
+                              // signupUser();
+
                               if (_signUpFormKey.currentState!.validate()) {
                                 signupUser();
                               }
@@ -163,7 +173,14 @@ class _AuthScreenState extends State<AuthScreen> {
                             height: 10,
                           ),
                           CustomButton(
-                            onTap: () {},
+                            onTap: () {
+                              print('tap');
+                              // signupUser();
+
+                              if (_signInFormKey.currentState!.validate()) {
+                                signInUser();
+                              }
+                            },
                             text: 'Sign In',
                           ),
                         ],
@@ -178,6 +195,7 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 
+  @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
