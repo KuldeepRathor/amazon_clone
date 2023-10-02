@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:amazon_clone/constants/global_variables.dart';
+import 'package:amazon_clone/features/admin/screens/admin_screen.dart';
 import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
 import 'package:amazon_clone/features/auth/services/auth_services.dart';
 import 'package:amazon_clone/features/home/home_screen.dart';
@@ -41,11 +42,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    print("Building MyApp widget");
+    print("Building MyApp");
     final userProvider = Provider.of<UserProvider>(context);
     print("User token: ${userProvider.user.token}");
     return MaterialApp(
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       title: 'Amazon Clone',
       theme: ThemeData(
         scaffoldBackgroundColor: GlobalVariables.backgroundColor,
@@ -63,8 +64,11 @@ class _MyAppState extends State<MyApp> {
         settings,
       ),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
+          // ? Provider.of<UserProvider>(context).user.type == 'user'
           ? BottomBar()
-          : AuthScreen(),
+          // : const AdminScreen()
+          : const AuthScreen(),
+      // AuthScreen(),
     );
   }
 }

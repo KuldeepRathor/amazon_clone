@@ -19,6 +19,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (context) => BottomBar(),
       );
+    case HomeScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (context) => HomeScreen(),
+      );
     default:
       return MaterialPageRoute(
         settings: routeSettings,

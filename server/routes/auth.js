@@ -5,6 +5,10 @@ const authRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const auth = require('../middleware/auth');
 
+
+/// npm run dev
+
+
 authRouter.post('/api/signup/', async (req, res) => {
     //get the data from client
 
