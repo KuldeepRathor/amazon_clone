@@ -77,16 +77,20 @@ class AuthService {
         response: res,
         context: context,
         onSuccess: () async {
+          // SharedPreferences prefs = await SharedPreferences.getInstance();
+          // String token = jsonDecode(res.body)['token'];
+          // await prefs.setString('x-auth-token', token);
+
+          // // Store the token here
+
+          // String? tokenRead = prefs.getString(token);
+          // debugPrint(tokenRead);
+
+          // Provider.of<UserProvider>(context, listen: false).setUser(res.body);
           SharedPreferences prefs = await SharedPreferences.getInstance();
-          String token = jsonDecode(res.body)['token'];
-          await prefs.setString('x-auth-token', token);
-
-          // Store the token here
-
-          String? tokenRead = prefs.getString(token);
-          debugPrint(tokenRead);
-
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
+          await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
+
           Navigator.pushNamedAndRemoveUntil(
             context,
             BottomBar.routeName,
@@ -101,16 +105,19 @@ class AuthService {
   }
 
   // get user data
-  void getUserData(BuildContext context) async {
+  Future<void> getUserData(BuildContext context) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? token = prefs.getString('x-auth-token');
+      String? token = await prefs.getString('x-auth-token');
+      print('Token is: $token');
 
       if (token == null) {
+        prefs.setString('x-auth-token', '');
+
         print('Token is null');
         return;
       }
-
+      print("Calling tokenres");
       var tokenRes = await http.post(
         Uri.parse('$uri/tokenIsValid'),
         headers: <String, String>{
@@ -119,8 +126,9 @@ class AuthService {
         },
       );
       var response = jsonDecode(tokenRes.body);
-
+      print("calling response${response}");
       if (response == true) {
+        print('Calling user res${response == true}');
         //get user data
         http.Response userRes = await http.get(
           Uri.parse('$uri/'),
@@ -130,7 +138,9 @@ class AuthService {
           },
         );
         var userProvider = Provider.of<UserProvider>(context, listen: false);
+        print("CAlling setuser");
         userProvider.setUser(userRes.body);
+        print("Called setuser${userRes.body}");
       }
     } catch (e) {
       print(e);

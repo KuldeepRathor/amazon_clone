@@ -18,13 +18,7 @@ class _AdminScreenState extends State<AdminScreen> {
   double bottomBarBorderWidth = 5;
 
   List<Widget> pages = [
-    PostScreen(),
-    // const Center(
-    //   child: Text(
-    //     'Posts Page',
-    //     style: TextStyle(color: Colors.black),
-    //   ),
-    // ),
+    const PostScreen(),
     const Center(
       child: Text('Analytics Page'),
     ),
@@ -71,6 +65,7 @@ class _AdminScreenState extends State<AdminScreen> {
           ]),
         ),
       ),
+      body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _page,
         selectedItemColor: GlobalVariables.selectedNavBarColor,

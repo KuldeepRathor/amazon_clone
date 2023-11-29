@@ -21,7 +21,7 @@ authRouter.post('/api/signup/', async (req, res) => {
             return res.status(400).json({ msg: 'USer with same email already exists!' })
         }
 
-        const hashedPassword = await bcryptjs.hash(password, 8);
+        const hashedPassword = await bcryptjs.hash(password,8 );
 
         let user = new User({
             name,
@@ -87,7 +87,7 @@ authRouter.post("/tokenIsValid",async(req,res)=>{
 
         if(!verified) return res.json(false);
 
-        const user = await User.findByID(verified.id);
+        const user = await User.findById(verified.id);
 
         if(!user) return res.json(false);
         res.json(true);

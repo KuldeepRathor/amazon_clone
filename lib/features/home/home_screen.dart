@@ -3,6 +3,7 @@ import 'package:amazon_clone/features/home/widgets/address_box.dart';
 import 'package:amazon_clone/features/home/widgets/carausel_image.dart';
 import 'package:amazon_clone/features/home/widgets/deal_of_the_day.dart';
 import 'package:amazon_clone/features/home/widgets/top_categories.dart';
+import 'package:amazon_clone/features/search/screens/search_screen.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,10 +18,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void navigateToSearchScreen(String query) {
+    Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+  }
+
   @override
   Widget build(BuildContext context) {
-    // final user = Provider.of<UserProvider>(context).user;
-    // print("Building HomeScreen with token: ${user.token}");
+    final user = Provider.of<UserProvider>(context).user;
+    print("Building HomeScreen with token: ${user.token}");
 
     return Scaffold(
       appBar: PreferredSize(
@@ -41,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(7),
                   elevation: 1,
                   child: TextFormField(
+                    onFieldSubmitted: navigateToSearchScreen,
                     decoration: InputDecoration(
                       prefixIcon: InkWell(
                         onTap: () {},
@@ -100,22 +106,25 @@ class _HomeScreenState extends State<HomeScreen> {
           //     user.toJson(),
           //   ),
           // ),
-          const SingleChildScrollView(
+          SingleChildScrollView(
         child: Column(
           children: [
-            AddressBox(),
-            SizedBox(
+            Text(
+              user.toJson(),
+            ),
+            const AddressBox(),
+            const SizedBox(
               height: 10,
             ),
-            TopCategories(),
-            SizedBox(
+            const TopCategories(),
+            const SizedBox(
               height: 10,
             ),
-            CarauselImage(),
-            SizedBox(
+            const CarauselImage(),
+            const SizedBox(
               height: 10,
             ),
-            DealOfDay(),
+            const DealOfDay(),
           ],
         ),
       ),

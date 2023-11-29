@@ -36,15 +36,19 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     print("getUserData called from initState");
+    GetToken();
+    // authService.getUserData(context);
+  }
 
-    authService.getUserData(context);
+  GetToken() async {
+    await authService.getUserData(context);
   }
 
   @override
   Widget build(BuildContext context) {
     print("Building MyApp");
     final userProvider = Provider.of<UserProvider>(context);
-    print("User token: ${userProvider.user.token}");
+    // print("User token: ${userProvider.user.token}");
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Amazon Clone',
@@ -63,12 +67,13 @@ class _MyAppState extends State<MyApp> {
       onGenerateRoute: (settings) => generateRoute(
         settings,
       ),
-      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          // ? Provider.of<UserProvider>(context).user.type == 'user'
-          ? BottomBar()
-          // : const AdminScreen()
-          : const AuthScreen(),
-      // AuthScreen(),
+      home: context.watch<UserProvider>().user.token != ""
+          ? Provider.of<UserProvider>(context).user.type == 'user'
+              ? BottomBar()
+              :
+              // BottomBar()
+              AdminScreen()
+          : AuthScreen(),
     );
   }
 }
