@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    print("getUserData called from initState");
+    debugPrint("getUserData called from initState");
     GetToken();
     // authService.getUserData(context);
   }
@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    print("Building MyApp");
+    debugPrint("Building MyApp");
     final userProvider = Provider.of<UserProvider>(context);
     // print("User token: ${userProvider.user.token}");
     return MaterialApp(
