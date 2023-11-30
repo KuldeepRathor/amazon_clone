@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const authRouter = require('../routes/auth');
+const { productSchema } = require('./product');
 
 const userSchema = mongoose.Schema({
     name: {
@@ -39,6 +40,13 @@ const userSchema = mongoose.Schema({
         default: 'user',
     },
     //cart
+    cart:[{
+        product:productSchema,
+        quantity:{
+            type:Number,
+            required:true,
+        }
+    }]
 })
 
 const User = mongoose.model("User", userSchema);

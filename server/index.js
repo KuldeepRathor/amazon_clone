@@ -9,6 +9,7 @@ const DB = "mongodb+srv://cooldeep:12345@cluster0.cfzix0h.mongodb.net/?retryWrit
 const authRouter = require("./routes/auth");
 const adminRouter = require('./routes/admin');
 const productRouter = require('./routes/product');
+const userRouter = require('./routes/user');
 
 
 //Init
@@ -23,6 +24,7 @@ app.use(express.json());
 app.use(authRouter);
 app.use(adminRouter);
 app.use(productRouter);
+app.use(userRouter);
 
 
 //connections
