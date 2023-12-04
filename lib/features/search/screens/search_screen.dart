@@ -4,7 +4,7 @@ import 'package:amazon_clone/constants/loader.dart';
 import 'package:amazon_clone/features/home/widgets/address_box.dart';
 import 'package:amazon_clone/features/product_details/screens/product_details_screens.dart';
 import 'package:amazon_clone/features/search/services/search_services.dart';
-import 'package:amazon_clone/features/search/widget/widget.dart';
+import 'package:amazon_clone/features/search/widget/searched_product.dart';
 import 'package:amazon_clone/models/product.dart';
 import 'package:flutter/material.dart';
 
@@ -120,8 +120,8 @@ class _SearchScreenState extends State<SearchScreen> {
             ? const Loader()
             : Column(
                 children: [
-                  AddressBox(),
-                  SizedBox(
+                  const AddressBox(),
+                  const SizedBox(
                     height: 10,
                   ),
                   Expanded(

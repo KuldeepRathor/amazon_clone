@@ -48,7 +48,7 @@ class _PostScreenState extends State<PostScreen> {
         : Scaffold(
             body: GridView.builder(
                 itemCount: products!.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2),
                 itemBuilder: (context, index) {
                   final productsData = products![index];
@@ -74,7 +74,7 @@ class _PostScreenState extends State<PostScreen> {
                             onPressed: () {
                               deleteProduct(productsData, index);
                             },
-                            icon: Icon(Icons.delete_outline),
+                            icon: const Icon(Icons.delete_outline),
                           ),
                         ],
                       )

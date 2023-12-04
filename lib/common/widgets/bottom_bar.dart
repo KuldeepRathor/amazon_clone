@@ -1,14 +1,16 @@
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/features/account/screens/account_screens.dart';
+import 'package:amazon_clone/features/cart/screens/cart_screen.dart';
+import 'package:amazon_clone/features/home/home_screen.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:provider/provider.dart';
 
-import '../../features/home/home_screen.dart';
-
 class BottomBar extends StatefulWidget {
   static const String routeName = '/actual-home';
+
+  const BottomBar({super.key});
 
   @override
   State<BottomBar> createState() => _BottomBarState();
@@ -18,14 +20,12 @@ class _BottomBarState extends State<BottomBar> {
   int _page = 0;
   double bottomBarWidth = 42;
   double bottomBarBorderWidth = 5;
-  int _cartBadgeAmount = 3;
+  // int _cartBadgeAmount = 3;
 
   List<Widget> pages = [
     const HomeScreen(),
-    AccountScreen(),
-    const Center(
-      child: Text('Cart Page'),
-    ),
+    const AccountScreen(),
+    const CartScreen(),
   ];
 
   void updatePage(int page) {

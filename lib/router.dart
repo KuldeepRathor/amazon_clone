@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_import
 
+import 'package:amazon_clone/features/address/screens/address_screen.dart';
 import 'package:amazon_clone/features/admin/screens/add_product_screen.dart';
 import 'package:amazon_clone/features/home/category_deals_screen.dart';
 import 'package:amazon_clone/features/home/home_screen.dart';
@@ -56,6 +57,15 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (context) => ProductDetailsScreen(
           product: product,
+        ),
+      );
+    case AddressScreen.routeName:
+      var totalAmount = routeSettings.arguments as String;
+
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (context) => AddressScreen(
+          totalAmount: totalAmount,
         ),
       );
     default:

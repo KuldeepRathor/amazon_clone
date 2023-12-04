@@ -27,7 +27,7 @@ class CustomButton extends StatelessWidget {
           double.infinity,
           50,
         ),
-        primary: color,
+        backgroundColor: color,
       ),
     );
   }

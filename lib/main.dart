@@ -4,7 +4,6 @@ import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/features/admin/screens/admin_screen.dart';
 import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
 import 'package:amazon_clone/features/auth/services/auth_services.dart';
-import 'package:amazon_clone/features/home/home_screen.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:amazon_clone/router.dart';
 import 'package:flutter/material.dart';
@@ -36,11 +35,11 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     debugPrint("getUserData called from initState");
-    GetToken();
+    getToken();
     // authService.getUserData(context);
   }
 
-  GetToken() async {
+  getToken() async {
     await authService.getUserData(context);
   }
 

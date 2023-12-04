@@ -26,8 +26,8 @@ class _OrdersState extends State<Orders> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              padding: EdgeInsets.only(left: 15),
-              child: Text(
+              padding: const EdgeInsets.only(left: 15),
+              child: const Text(
                 'Your Orders',
                 style: TextStyle(
                     fontSize: 18,
@@ -36,7 +36,7 @@ class _OrdersState extends State<Orders> {
               ),
             ),
             Container(
-              padding: EdgeInsets.only(right: 15),
+              padding: const EdgeInsets.only(right: 15),
               child: Text(
                 'See all',
                 style: TextStyle(
@@ -49,7 +49,7 @@ class _OrdersState extends State<Orders> {
         Container(
           height: 170,
           width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: 10,
             top: 20,
             right: 0,

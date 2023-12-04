@@ -6,7 +6,6 @@ import 'package:amazon_clone/constants/error_handling.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/constants/utils.dart';
 import 'package:amazon_clone/common/widgets/bottom_bar.dart';
-import 'package:amazon_clone/features/home/home_screen.dart';
 import 'package:amazon_clone/models/user.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +52,7 @@ class AuthService {
             );
           });
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       showSnackBar(context, e.toString());
     }
   }
@@ -100,7 +99,7 @@ class AuthService {
         },
       );
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       showSnackBar(context, e.toString());
     }
   }
@@ -110,15 +109,15 @@ class AuthService {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = await prefs.getString('x-auth-token');
-      print('Token is: $token');
+      debugPrint('Token is: $token');
 
       if (token == null) {
         prefs.setString('x-auth-token', '');
 
-        print('Token is null');
+        debugPrint('Token is null');
         return;
       }
-      print("Calling tokenres");
+      debugPrint("Calling tokenres");
       var tokenRes = await http.post(
         Uri.parse('$uri/tokenIsValid'),
         headers: <String, String>{
@@ -127,9 +126,9 @@ class AuthService {
         },
       );
       var response = jsonDecode(tokenRes.body);
-      print("calling response${response}");
+      debugPrint("calling response$response");
       if (response == true) {
-        print('Calling user res${response == true}');
+        debugPrint('Calling user res${response == true}');
         //get user data
         http.Response userRes = await http.get(
           Uri.parse('$uri/'),
@@ -139,12 +138,12 @@ class AuthService {
           },
         );
         var userProvider = Provider.of<UserProvider>(context, listen: false);
-        print("CAlling setuser");
+        debugPrint("CAlling setuser");
         userProvider.setUser(userRes.body);
-        print("Called setuser${userRes.body}");
+        debugPrint("Called setuser${userRes.body}");
       }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       showSnackBar(context, e.toString());
     }
   }

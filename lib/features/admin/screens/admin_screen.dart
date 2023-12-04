@@ -1,9 +1,6 @@
 import 'package:amazon_clone/constants/global_variables.dart';
-import 'package:amazon_clone/features/account/screens/account_screens.dart';
 import 'package:amazon_clone/features/admin/screens/posts_screen.dart';
-import 'package:amazon_clone/features/home/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart' as badges;
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});

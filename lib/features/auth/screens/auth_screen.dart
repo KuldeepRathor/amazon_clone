@@ -116,7 +116,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           ),
                           CustomButton(
                             onTap: () {
-                              print('tap');
+                              debugPrint('tap');
                               // signupUser();
 
                               if (_signUpFormKey.currentState!.validate()) {
@@ -174,7 +174,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           ),
                           CustomButton(
                             onTap: () {
-                              print('tap sign up');
+                              debugPrint('tap sign up');
                               // signupUser();
 
                               if (_signInFormKey.currentState!.validate()) {
