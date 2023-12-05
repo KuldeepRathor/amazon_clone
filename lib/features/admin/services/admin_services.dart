@@ -1,10 +1,12 @@
+// ignore_for_file: use_build_context_synchronously, duplicate_ignore
+
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:amazon_clone/constants/error_handling.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/constants/utils.dart';
-import 'package:amazon_clone/features/account/widgets/orders.dart';
+import 'package:amazon_clone/features/admin/models/sales.dart';
 import 'package:amazon_clone/models/order.dart';
 import 'package:amazon_clone/models/product.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
@@ -65,35 +67,34 @@ class AdminServices {
 
   //get all the products
 
-  // Future<List<Product>> fetchAllProducts(BuildContext context) async {
-  //   final userProvider = Provider.of<UserProvider>(context, listen: false);
-  //   List<Product> productList = [];
-  //   try {
-  //     http.Response res =
-  //         await http.get(Uri.parse('$uri/api/products'), headers: {
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //       'x-auth-token': userProvider.user.token,
-  //     });
+  Future<List<Product>> fetchAllProducts(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    List<Product> productList = [];
+    try {
+      http.Response res =
+          await http.get(Uri.parse('$uri/admin/get-products'), headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': userProvider.user.token,
+      });
 
-  //     // ignore: use_build_context_synchronously
-  //     httpErrorHandle(
-  //         response: res,
-  //         context: context,
-  //         onSuccess: () {
-  //           for (int i = 0; i < jsonDecode(res.body).length; i++) {
-  //             productList.add(
-  //               Product.fromJson(jsonEncode(
-  //                 jsonDecode(res.body)[i],
-  //               )),
-  //             );
-  //           }
-  //         });
-  //   } catch (e) {
-  //     debugPrint(e.toString());
-  //     showSnackBar(context, e.toString());
-  //   }
-  //   return productList;
-  // }
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () {
+            for (int i = 0; i < jsonDecode(res.body).length; i++) {
+              productList.add(
+                Product.fromJson(jsonEncode(
+                  jsonDecode(res.body)[i],
+                )),
+              );
+            }
+          });
+    } catch (e) {
+      debugPrint(e.toString());
+      showSnackBar(context, e.toString());
+    }
+    return productList;
+  }
 
   void deleteProduct({
     required BuildContext context,
@@ -134,21 +135,22 @@ class AdminServices {
         'x-auth-token': userProvider.user.token,
       });
 
-      // ignore: use_build_context_synchronously
       httpErrorHandle(
-          response: res,
-          context: context,
-          onSuccess: () {
-            for (int i = 0; i < jsonDecode(res.body).length; i++) {
-              orderList.add(
-                Order.fromJson(jsonEncode(
+        response: res,
+        context: context,
+        onSuccess: () {
+          for (int i = 0; i < jsonDecode(res.body).length; i++) {
+            orderList.add(
+              Order.fromJson(
+                jsonEncode(
                   jsonDecode(res.body)[i],
-                )),
-              );
-            }
-          });
+                ),
+              ),
+            );
+          }
+        },
+      );
     } catch (e) {
-      debugPrint(e.toString());
       showSnackBar(context, e.toString());
     }
     return orderList;
@@ -161,6 +163,7 @@ class AdminServices {
     required VoidCallback onSuccess,
   }) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
+
     try {
       http.Response res = await http.post(
         Uri.parse('$uri/admin/change-order-status'),
@@ -173,15 +176,52 @@ class AdminServices {
           'status': status,
         }),
       );
+
       httpErrorHandle(
-          response: res,
-          context: context,
-          onSuccess: () {
-            onSuccess();
-          });
+        response: res,
+        context: context,
+        onSuccess: onSuccess,
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
+  Future<Map<String, dynamic>> getEarnings(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    List<Sales> sales = [];
+    int totalEarning = 0;
+
+    try {
+      http.Response res =
+          await http.get(Uri.parse('$uri/admin/analytics'), headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': userProvider.user.token,
+      });
+
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          var response = jsonDecode(res.body);
+          totalEarning = response['totalEarnings'] ?? 0;
+          sales = [
+            Sales('Mobiles', response['mobileEarnings'] ?? 0),
+            Sales('Essentials', response['essentialEarnings'] ?? 0),
+            Sales('Books', response['booksEarnings'] ?? 0),
+            Sales('Appliances', response['applianceEarnings'] ?? 0),
+            Sales('Fashion', response['fashionEarnings'] ?? 0),
+          ];
+        },
+      );
     } catch (e) {
       debugPrint(e.toString());
       showSnackBar(context, e.toString());
     }
+
+    return {
+      'sales': sales,
+      'totalEarnings': totalEarning,
+    };
   }
 }

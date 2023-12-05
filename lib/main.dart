@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_local_variable
 
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/features/admin/screens/admin_screen.dart';

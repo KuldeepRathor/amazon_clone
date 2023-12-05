@@ -46,41 +46,45 @@ class _PostScreenState extends State<PostScreen> {
     return products == null
         ? const Loader()
         : Scaffold(
-            body: GridView.builder(
-                itemCount: products!.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
-                itemBuilder: (context, index) {
-                  final productsData = products![index];
-                  return Column(
-                    children: [
-                      SizedBox(
-                        height: 140,
-                        child: SingleProduct(
-                          image: productsData.images[0],
+            body: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GridView.builder(
+                  itemCount: products!.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                  ),
+                  itemBuilder: (context, index) {
+                    final productsData = products![index];
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: 140,
+                          child: SingleProduct(
+                            image: productsData.images[0],
+                          ),
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              productsData.name,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                productsData.name,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              ),
                             ),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              deleteProduct(productsData, index);
-                            },
-                            icon: const Icon(Icons.delete_outline),
-                          ),
-                        ],
-                      )
-                    ],
-                  );
-                }),
+                            IconButton(
+                              onPressed: () {
+                                deleteProduct(productsData, index);
+                              },
+                              icon: const Icon(Icons.delete_outline),
+                            ),
+                          ],
+                        )
+                      ],
+                    );
+                  }),
+            ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 navigateToAddProduct();

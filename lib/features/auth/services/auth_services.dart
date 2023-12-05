@@ -108,7 +108,7 @@ class AuthService {
   Future<void> getUserData(BuildContext context) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? token = await prefs.getString('x-auth-token');
+      String? token = prefs.getString('x-auth-token');
       debugPrint('Token is: $token');
 
       if (token == null) {

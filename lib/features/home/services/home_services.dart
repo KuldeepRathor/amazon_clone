@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, duplicate_ignore
+
 import 'dart:convert';
 
 import 'package:amazon_clone/constants/global_variables.dart';
@@ -27,7 +29,6 @@ class HomeServices {
             'x-auth-token': userProvider.user.token,
           });
 
-      // ignore: use_build_context_synchronously
       httpErrorHandle(
           response: res,
           context: context,

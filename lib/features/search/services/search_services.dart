@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, duplicate_ignore
+
 import 'dart:convert';
 
 import 'package:amazon_clone/constants/error_handling.dart';
@@ -27,7 +29,6 @@ class SearchServices {
         },
       );
 
-      // ignore: use_build_context_synchronously
       httpErrorHandle(
           response: res,
           context: context,
