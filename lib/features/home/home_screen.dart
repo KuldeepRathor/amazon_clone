@@ -106,25 +106,25 @@ class _HomeScreenState extends State<HomeScreen> {
           //     user.toJson(),
           //   ),
           // ),
-          SingleChildScrollView(
+          const SingleChildScrollView(
         child: Column(
           children: [
-            Text(
-              user.toJson(),
-            ),
-            const AddressBox(),
-            const SizedBox(
+            // Text(
+            //   user.toJson(),
+            // ),
+            AddressBox(),
+            SizedBox(
               height: 10,
             ),
-            const TopCategories(),
-            const SizedBox(
+            TopCategories(),
+            SizedBox(
               height: 10,
             ),
-            const CarauselImage(),
-            const SizedBox(
+            CarauselImage(),
+            SizedBox(
               height: 10,
             ),
-            const DealOfDay(),
+            DealOfDay(),
           ],
         ),
       ),

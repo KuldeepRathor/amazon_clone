@@ -62,6 +62,7 @@ class _MyAppState extends State<MyApp> {
             color: Colors.black87,
           ),
         ),
+        // useMaterial3: true,
       ),
       onGenerateRoute: (settings) => generateRoute(
         settings,
