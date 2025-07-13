@@ -1,0 +1,2 @@
+/Users/kuldeeprathor/codes/flutter_codes/amazon_clone/android/app/.cxx/Debug/426b1w2f/x86/CMakeFiles/edit_cache.dir
+/Users/kuldeeprathor/codes/flutter_codes/amazon_clone/android/app/.cxx/Debug/426b1w2f/x86/CMakeFiles/rebuild_cache.dir

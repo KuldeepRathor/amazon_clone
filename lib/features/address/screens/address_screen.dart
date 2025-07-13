@@ -176,7 +176,7 @@ class _AddressScreenState extends State<AddressScreen> {
                       onPressed: () {
                         payPressed(address);
                       },
-                      paymentConfiguration: snapshot.data,
+                      paymentConfiguration: snapshot.data!,
                       paymentItems: paymentItems,
                       type: GooglePayButtonType.buy,
                       height: 50,

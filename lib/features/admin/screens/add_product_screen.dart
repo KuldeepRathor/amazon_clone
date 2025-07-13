@@ -127,36 +127,36 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       )
                     : GestureDetector(
                         onTap: selectImage,
-                        child: DottedBorder(
-                          borderType: BorderType.RRect,
-                          dashPattern: const [10, 4],
-                          strokeCap: StrokeCap.round,
-                          radius: const Radius.circular(10),
-                          child: Container(
-                            width: double.infinity,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          width: double.infinity,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: Colors.grey,
+                              width: 2,
+                              style: BorderStyle
+                                  .solid, // No dashed, but solid border for compatibility
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.folder_open,
-                                  size: 40,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.folder_open,
+                                size: 40,
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                'Select Product Images',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.grey.shade400,
                                 ),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                Text(
-                                  'Select Product Images',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.grey.shade400,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
